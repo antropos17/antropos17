@@ -8,22 +8,6 @@
 
 ---
 
-### 🛡️ [AEGIS](https://github.com/antropos17/Aegis)
-
-**Independent AI Oversight Layer** — monitors what AI agents do on your computer.
-
-<p>
-  <a href="https://github.com/antropos17/Aegis"><img src="https://img.shields.io/github/stars/antropos17/Aegis?style=flat-square" alt="Stars"></a>
-  <a href="https://github.com/antropos17/Aegis/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License"></a>
-  <a href="https://github.com/antropos17/Aegis"><img src="https://img.shields.io/badge/Tests-408-6E9F18?style=flat-square" alt="Tests"></a>
-  <a href="https://github.com/antropos17/Aegis"><img src="https://img.shields.io/badge/Agents-98-14b8a6?style=flat-square" alt="Agents"></a>
-</p>
-
-### 🏛️ [The AI Museum](https://v0-theaimuseum.vercel.app)
-
-Interactive encyclopedia of AI history (1950–present). Neo-8-Bit CRT aesthetic.
-
----
 
 ### Tech Stack
 
