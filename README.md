@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://github.com/antropos17">
-    <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=4ECDC4&center=true&vCenter=true&width=500&lines=AI+Security+%26+Oversight;Open+Source+Builder;Vibe+Coder+%F0%9F%9A%80" alt="Typing SVG" />
-  </a>
-</p>
-
 <p align="center">Building tools that keep AI agents honest. Security-first, local-first, open-source.</p>
 
 ---
