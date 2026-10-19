@@ -65,12 +65,13 @@ jobs:
         with:
           name: public-profile-cards
           path: ${{ runner.temp }}/public-profile-cards
-      - name: Validate and install only the two card assets
+      - name: Validate cards and derive compact activity assets
         env:
           CARD_INPUT: ${{ runner.temp }}/public-profile-cards
         run: |
           python3 - <<'PY'
           import os
+          import re
           from pathlib import Path
           import xml.etree.ElementTree as ET
 
@@ -100,28 +101,67 @@ jobs:
                       attribute = key.rsplit("}", 1)[-1].lower()
                       if attribute.startswith("on") or (attribute == "href" and not value.startswith("#")):
                           raise SystemExit("Unexpected external SVG reference")
-              cards.append((name, root))
-          # Keep the two cards on one canvas without stretching chart contents.
-          widths = {root.attrib["width"] for _, root in cards}
-          if len(widths) != 1:
-              raise SystemExit("Card widths must match")
-          height = max(float(root.attrib["height"]) for _, root in cards)
-          width = widths.pop()
-          for name, root in cards:
-              background = root.find(".//*[@data-testid='card-bg']")
-              if background is None:
-                  raise SystemExit("Expected card background")
-              background.set("height", f"{height - 1:g}")
-              # Transparent breathing room also separates cards when they wrap.
-              root.set("height", f"{height + 16:g}")
-              root.set("viewBox", f"0 -8 {width} {height + 16:g}")
-              (destination / name).write_bytes(ET.tostring(root, encoding="utf-8"))
+              cards.append((name, root, data))
+
+          metrics = (
+              ("stars", "Stars"),
+              ("commits", "Commits · last year"),
+              ("prs", "PRs"),
+              ("issues", "Issues"),
+          )
+          stats = next(root for name, root, _ in cards if name == "stats.svg")
+          values = {}
+          numeric = re.compile(r"(?:0|[1-9][0-9]*|[1-9][0-9]{0,2}(?:,[0-9]{3})+)(?:\.[0-9]+)?[kmb]?", re.IGNORECASE)
+          for metric, _ in metrics:
+              elements = stats.findall(f".//*[@data-testid='{metric}']")
+              if len(elements) != 1 or elements[0].tag != "{http://www.w3.org/2000/svg}text":
+                  raise SystemExit(f"Expected exactly one text metric: {metric}")
+              value = "".join(elements[0].itertext()).strip()
+              if len(value) > 20 or not numeric.fullmatch(value):
+                  raise SystemExit(f"Invalid numeric metric: {metric}")
+              values[metric] = value
+
+          for filename, foreground, label_color in (
+              ("activity.svg", "#1f2328", "#59636e"),
+              ("activity-dark.svg", "#f0f6fc", "#9198a1"),
+          ):
+              namespace = "http://www.w3.org/2000/svg"
+              def element(tag, **attributes):
+                  return ET.Element(f"{{{namespace}}}{tag}", attributes)
+
+              activity = element(
+                  "svg", width="280", height="112", viewBox="0 0 280 112",
+                  role="img", **{"aria-labelledby": "activity-title activity-description"},
+              )
+              title = element("title", id="activity-title")
+              title.text = "Public GitHub activity"
+              activity.append(title)
+              description = element("desc", id="activity-description")
+              description.text = "; ".join(f"{label}: {values[metric]}" for metric, label in metrics)
+              activity.append(description)
+              for index, (metric, label) in enumerate(metrics):
+                  x, y = (index % 2) * 140, (index // 2) * 56
+                  number = element(
+                      "text", x=str(x), y=str(y + 28), fill=foreground,
+                      **{"font-family": "Segoe UI, Arial, sans-serif", "font-size": "22", "font-weight": "600"},
+                  )
+                  number.text = values[metric]
+                  activity.append(number)
+                  caption = element(
+                      "text", x=str(x), y=str(y + 47), fill=label_color,
+                      **{"font-family": "Segoe UI, Arial, sans-serif", "font-size": "12"},
+                  )
+                  caption.text = label
+                  activity.append(caption)
+              (destination / filename).write_bytes(ET.tostring(activity, encoding="utf-8"))
+          for name, _, data in cards:
+              (destination / name).write_bytes(data)
           PY
       - name: Commit changed cards
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add -- assets/generated/stats.svg assets/generated/languages.svg
+          git add -- assets/generated/stats.svg assets/generated/languages.svg assets/generated/activity.svg assets/generated/activity-dark.svg
           if git diff --cached --quiet; then
             echo "Public profile cards are unchanged."
             exit 0
