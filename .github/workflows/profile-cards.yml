@@ -108,8 +108,13 @@ jobs:
           height = max(float(root.attrib["height"]) for _, root in cards)
           width = widths.pop()
           for name, root in cards:
-              root.set("height", f"{height:g}")
-              root.set("viewBox", f"0 0 {width} {height:g}")
+              background = root.find(".//*[@data-testid='card-bg']")
+              if background is None:
+                  raise SystemExit("Expected card background")
+              background.set("height", f"{height - 1:g}")
+              # Transparent breathing room also separates cards when they wrap.
+              root.set("height", f"{height + 16:g}")
+              root.set("viewBox", f"0 -8 {width} {height + 16:g}")
               (destination / name).write_bytes(ET.tostring(root, encoding="utf-8"))
           PY
       - name: Commit changed cards

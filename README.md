@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/studio-cover.svg" width="804" alt="Escape Studio" />
+  <img src="assets/studio-cover.svg" width="805" alt="Escape Studio" />
 </p>
 
 <p align="center">Agents, interfaces and interactive worlds.</p>
@@ -12,8 +12,7 @@
 <h3 align="center">Selected work</h3>
 
 <p align="center">
-  <a href="https://github.com/antropos17/Aegis"><img src="assets/project-aegis.svg" width="400" alt="AEGIS — agent monitoring, local reviews and opt-in action controls. Open repository." /></a>
-  <a href="https://github.com/antropos17/commit-zero"><img src="assets/project-commit-zero.svg" width="400" alt="Commit Zero — local agent collaboration and language-and-game experiments. Open repository." /></a>
+  <a href="https://github.com/antropos17/Aegis"><img src="assets/project-aegis.svg" width="392" alt="AEGIS — agent monitoring, local reviews and opt-in action controls. Open repository." /></a>&emsp;&ensp;<a href="https://github.com/antropos17/commit-zero"><img src="assets/project-commit-zero.svg" width="392" alt="Commit Zero — local agent collaboration and language-and-game experiments. Open repository." /></a>
 </p>
 
 <p align="center">
@@ -32,8 +31,7 @@
 <h3 align="center">Activity</h3>
 
 <p align="center">
-  <img src="assets/generated/stats.svg" width="400" alt="GitHub public activity statistics for antropos17" />
-  <img src="assets/generated/languages.svg" width="400" alt="Language distribution across public repositories" />
+  <img src="assets/generated/stats.svg" width="392" alt="GitHub public activity statistics for antropos17" />&emsp;&ensp;<img src="assets/generated/languages.svg" width="392" alt="Language distribution across public repositories" />
 </p>
 
 <p align="center">

@@ -11,9 +11,12 @@ serve ordinary SVG images through GitHub's image proxy. No account or token is
 sent to either provider.
 
 The studio cover and two linked project cards are original SVG artwork stored
-in `assets/`. Project cards share a 400x224 canvas, 24px content padding, title and
-body baselines, and the same link target area. Native inline image wrapping makes
-them two columns when space permits and one column on narrow displays.
+in `assets/`. Project cards share a 400x224 surface, 24px content padding, title
+and body baselines, and the same link target area. Each canvas adds 8px transparent
+space above and below. Both paired rows display at 392px per card, with a breakable
+21px typographic gap at GitHub's 14px body size. Native inline image wrapping makes
+them two columns when space permits and one column on narrow displays, with
+vertical breathing room preserved by the transparent canvas edges.
 
 ## Saved metric cards
 
@@ -78,8 +81,9 @@ by upstream SHA and its initial production install uses the upstream lockfile.
 
 The cards share background `111820`, text `e6edf3`, accent `6ee7b7`, no border,
 12px corners and disabled animation. The stats card hides the derived rank.
-The publisher pads both SVG canvases to the greater of their two heights, without
-stretching the chart contents, so the cards keep matching outer dimensions.
+The publisher pads both SVG canvases to the greater of their two heights, plus
+8px transparent space above and below. It preserves chart dimensions and gives
+both backgrounds the same height, so the cards keep matching outer dimensions.
 
 Standard GitHub-hosted Ubuntu runner minutes are free for this public repository
 under [GitHub's current billing rules](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
