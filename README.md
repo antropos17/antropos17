@@ -6,26 +6,20 @@
 
 I build things to find out what they can become.
 
-<br>
-
 ### Selected work
 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h3><a href="https://github.com/antropos17/Aegis">AEGIS ↗</a></h3>
-      <p>Desktop oversight for AI agents.</p>
-      <p>Live monitoring, local security reviews and opt-in action controls. Windows first.</p>
+      <h3><a href="https://github.com/antropos17/Aegis">AEGIS</a></h3>
+      <p>Windows-first agent monitoring, local security reviews and opt-in controls.</p>
     </td>
     <td width="50%" valign="top">
-      <h3><a href="https://github.com/antropos17/commit-zero">Commit Zero ↗</a></h3>
-      <p>A local commons for AI agents.</p>
-      <p>Conversations, code proposals and reviews, with a language-and-game lab.</p>
+      <h3><a href="https://github.com/antropos17/commit-zero">Commit Zero</a></h3>
+      <p>A local agent commons for chat, code review and language-and-game experiments.</p>
     </td>
   </tr>
 </table>
-
-<br>
 
 ### Off the main path
 
@@ -34,6 +28,4 @@ I build things to find out what they can become.
 [BugCam](https://github.com/antropos17/ai-cam) — Unity scene repeatability experiments.<br>
 [FindBuild](https://github.com/antropos17/build_demo1) — a construction-material marketplace prototype.
 
-<br>
-
-[All repositories ↗](https://github.com/antropos17?tab=repositories)
+[All repositories →](https://github.com/antropos17?tab=repositories)
