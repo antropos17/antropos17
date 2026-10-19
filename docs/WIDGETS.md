@@ -1,5 +1,22 @@
 # Profile cards
 
+## Buttons and tool icons
+
+Navigation buttons use [Shields.io](https://shields.io/docs/static-badges) at a
+consistent 28px height. They link to this account's repository list and the
+profile's Activity section. The icons come from
+[Skill Icons](https://github.com/tandpfun/skill-icons); the eight displayed tools
+are present in the public projects, not a proficiency rating. These two providers
+serve ordinary SVG images through GitHub's image proxy. No account or token is
+sent to either provider.
+
+The studio cover and two linked project cards are original SVG artwork stored
+in `assets/`. Project cards share a 400x224 canvas, 24px content padding, title and
+body baselines, and the same link target area. Native inline image wrapping makes
+them two columns when space permits and one column on narrow displays.
+
+## Saved metric cards
+
 The profile uses two real GitHub metric cards saved as ordinary SVG files:
 
 - `assets/generated/stats.svg`: public GitHub activity and repository statistics.
@@ -12,8 +29,8 @@ call a public statistics-rendering service. The cards refresh through
 [profile-cards.yml](../.github/workflows/profile-cards.yml) once a night at 02:23
 UTC, or manually through **Actions > Refresh public profile cards > Run workflow**.
 Scheduled runs can be delayed or disabled by GitHub; the last successful SVGs stay
-visible. A first successful manual run is required before publishing README links
-to these files. No initial metrics or successful run are claimed by this document.
+visible. The [initial generation and publication](https://github.com/antropos17/antropos17/actions/runs/39186101345)
+completed successfully on 2026-10-19 before these cards were linked from the profile.
 
 ## Data, access and failure behavior
 
@@ -21,7 +38,7 @@ Generation uses the built-in, short-lived `GITHUB_TOKEN` with `contents: read`.
 There is no personal access token, private-repository permission, private-count
 option or external service account. The stats card explicitly disables
 `count_private` and `include_all_commits`: commit statistics use the renderer's
-default current-year window instead of claiming an all-time total. Public data
+default recent-year window instead of claiming an all-time total. Public data
 visibility and API accounting still follow GitHub and the upstream renderer.
 
 The generator job cannot push. A separate publisher job gets `contents: write`,
@@ -61,6 +78,8 @@ by upstream SHA and its initial production install uses the upstream lockfile.
 
 The cards share background `111820`, text `e6edf3`, accent `6ee7b7`, no border,
 12px corners and disabled animation. The stats card hides the derived rank.
+The publisher pads both SVG canvases to the greater of their two heights, without
+stretching the chart contents, so the cards keep matching outer dimensions.
 
 Standard GitHub-hosted Ubuntu runner minutes are free for this public repository
 under [GitHub's current billing rules](https://docs.github.com/en/billing/concepts/product-billing/github-actions).

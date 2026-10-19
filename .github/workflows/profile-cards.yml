@@ -80,6 +80,8 @@ jobs:
               raise SystemExit("Unexpected card artifact contents")
           destination = Path("assets/generated")
           destination.mkdir(parents=True, exist_ok=True)
+          ET.register_namespace("", "http://www.w3.org/2000/svg")
+          cards = []
           for name in sorted(names):
               path = source / name
               if path.is_symlink() or not path.is_file():
@@ -98,7 +100,17 @@ jobs:
                       attribute = key.rsplit("}", 1)[-1].lower()
                       if attribute.startswith("on") or (attribute == "href" and not value.startswith("#")):
                           raise SystemExit("Unexpected external SVG reference")
-              (destination / name).write_bytes(data)
+              cards.append((name, root))
+          # Keep the two cards on one canvas without stretching chart contents.
+          widths = {root.attrib["width"] for _, root in cards}
+          if len(widths) != 1:
+              raise SystemExit("Card widths must match")
+          height = max(float(root.attrib["height"]) for _, root in cards)
+          width = widths.pop()
+          for name, root in cards:
+              root.set("height", f"{height:g}")
+              root.set("viewBox", f"0 0 {width} {height:g}")
+              (destination / name).write_bytes(ET.tostring(root, encoding="utf-8"))
           PY
       - name: Commit changed cards
         env:
