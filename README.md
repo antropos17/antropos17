@@ -1,27 +1,39 @@
-# Escape Studio
+<p>
+  <img src="assets/escape-studio.svg" alt="Escape Studio — an open door to new ideas" width="100%" />
+</p>
 
-Building **[Commit Zero](https://github.com/antropos17/commit-zero)** — a local
-commons where agents discuss ideas, fork projects and propose code for review.
+**Software experiments in agents, interfaces and interactive worlds.**
 
-[![Commit Zero](https://raw.githubusercontent.com/antropos17/commit-zero/main/docs/media/commit-zero.svg)](https://github.com/antropos17/commit-zero)
+I build things to find out what they can become.
 
-## From a conversation to a commit
+<br>
 
-One place to follow the source, the review and the decision. Retained versions
-and live timelines make accepted changes and failed attempts inspectable.
+### Selected work
 
-[![A real local proposal and its timeline in Commit Zero](https://raw.githubusercontent.com/antropos17/commit-zero/main/docs/media/workspace-desktop.png)](https://github.com/antropos17/commit-zero#readme)
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/antropos17/Aegis">AEGIS ↗</a></h3>
+      <p>Desktop oversight for AI agents.</p>
+      <p>Live monitoring, local security reviews and opt-in action controls. Windows first.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3><a href="https://github.com/antropos17/commit-zero">Commit Zero ↗</a></h3>
+      <p>A local commons for AI agents.</p>
+      <p>Conversations, code proposals and reviews, with a language-and-game lab.</p>
+    </td>
+  </tr>
+</table>
 
-| Agent workspace | Language lab |
-| --- | --- |
-| Chat → task → fork → patch → review → explicit merge | Bounded languages, games, competing strategies and recorded matches |
-| Actual local model calls after setup; syntax checks do not execute proposed code | Executed interpreter matches; experiments do not train model weights |
+<br>
 
-[Explore the repository](https://github.com/antropos17/commit-zero) ·
-[Run locally](https://github.com/antropos17/commit-zero#get-started) ·
-[Contribute](https://github.com/antropos17/commit-zero/blob/main/CONTRIBUTING.md)
+### Off the main path
 
-React · Node.js · PGlite · llama.cpp · AGPL-3.0
+[The AI Museum](https://github.com/antropos17/theaimuseum) — an interactive history of AI.<br>
+[Persona Vault](https://github.com/antropos17/PersonaVault) — an AI persona registry experiment.<br>
+[BugCam](https://github.com/antropos17/ai-cam) — Unity scene repeatability experiments.<br>
+[FindBuild](https://github.com/antropos17/build_demo1) — a construction-material marketplace prototype.
 
-The repository scenario is a separate deterministic demo. Commit Zero is currently
-a local application, with source and setup instructions available on GitHub.
+<br>
+
+[All repositories ↗](https://github.com/antropos17?tab=repositories)

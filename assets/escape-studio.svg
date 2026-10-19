@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="620" viewBox="0 0 1440 620" role="img" aria-labelledby="title description">
+  <title id="title">Escape Studio</title>
+  <desc id="description">A crimson typographic poster with the words Escape Studio and a door opening beyond its frame.</desc>
+  <rect width="1440" height="620" fill="#b11226"/>
+  <g fill="#efefef" font-family="Arial Black,Arial,Helvetica,sans-serif" font-weight="900" font-size="240" letter-spacing="-12">
+    <text x="44" y="265" textLength="940" lengthAdjust="spacingAndGlyphs">ESCAPE</text>
+    <text x="44" y="487" textLength="940" lengthAdjust="spacingAndGlyphs">STUDIO</text>
+  </g>
+  <path d="M1082 128H1388V506H1082Z" fill="#efefef"/>
+  <path d="M1110 156H1360V506H1110Z" fill="#0a0a0a"/>
+  <path d="M1110 156L1264 84V434L1110 506Z" fill="#efefef"/>
+  <path d="M1230 276L1242 271V310L1230 315Z" fill="#b11226"/>
+</svg>
