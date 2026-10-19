@@ -1,0 +1,119 @@
+name: Refresh public profile cards
+
+on:
+  schedule:
+    - cron: "23 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-profile-cards
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.repository == 'antropos17/antropos17'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Generate public stats
+        uses: stats-organization/github-readme-stats-action@2c498845f71017821efaad14293ebc736156ef21 # v2
+        with:
+          card: stats
+          options: username=antropos17&show_icons=true&hide_rank=true&count_private=false&include_all_commits=false&hide_border=true&border_radius=12&bg_color=111820&text_color=e6edf3&title_color=6ee7b7&icon_color=6ee7b7&disable_animations=true&card_width=460
+          path: assets/generated/stats.svg
+          token: ${{ github.token }}
+          core_version: "2.2.0"
+          fail_on_error: "true"
+      - name: Generate public repository languages
+        uses: stats-organization/github-readme-stats-action@2c498845f71017821efaad14293ebc736156ef21 # v2
+        with:
+          card: top-langs
+          options: username=antropos17&layout=compact&langs_count=8&hide_border=true&border_radius=12&bg_color=111820&text_color=e6edf3&title_color=6ee7b7&disable_animations=true&card_width=460&exclude_repo=antropos17
+          path: assets/generated/languages.svg
+          token: ${{ github.token }}
+          core_version: "2.2.0"
+          fail_on_error: "true"
+      - name: Transfer generated cards
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: public-profile-cards
+          path: |
+            assets/generated/stats.svg
+            assets/generated/languages.svg
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: generate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Read current main branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Download this run's cards
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: public-profile-cards
+          path: ${{ runner.temp }}/public-profile-cards
+      - name: Validate and install only the two card assets
+        env:
+          CARD_INPUT: ${{ runner.temp }}/public-profile-cards
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          source = Path(os.environ["CARD_INPUT"])
+          names = {"stats.svg", "languages.svg"}
+          if {path.name for path in source.iterdir()} != names:
+              raise SystemExit("Unexpected card artifact contents")
+          destination = Path("assets/generated")
+          destination.mkdir(parents=True, exist_ok=True)
+          for name in sorted(names):
+              path = source / name
+              if path.is_symlink() or not path.is_file():
+                  raise SystemExit("Expected a regular SVG file")
+              data = path.read_bytes()
+              if not 100 < len(data) < 256_000:
+                  raise SystemExit("Unexpected SVG size")
+              root = ET.fromstring(data)
+              if root.tag != "{http://www.w3.org/2000/svg}svg":
+                  raise SystemExit("Expected an SVG root")
+              for element in root.iter():
+                  tag = element.tag.rsplit("}", 1)[-1].lower()
+                  if tag in {"script", "foreignobject", "image", "iframe"}:
+                      raise SystemExit("Unexpected active or embedded SVG content")
+                  for key, value in element.attrib.items():
+                      attribute = key.rsplit("}", 1)[-1].lower()
+                      if attribute.startswith("on") or (attribute == "href" and not value.startswith("#")):
+                          raise SystemExit("Unexpected external SVG reference")
+              (destination / name).write_bytes(data)
+          PY
+      - name: Commit changed cards
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add -- assets/generated/stats.svg assets/generated/languages.svg
+          if git diff --cached --quiet; then
+            echo "Public profile cards are unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh public profile cards [skip ci]"
+          askpass="$RUNNER_TEMP/profile-cards-askpass.sh"
+          trap 'rm -f "$askpass"' EXIT
+          printf '#!/bin/sh\ncase "$1" in *Username*) echo x-access-token ;; *) echo "$GH_TOKEN" ;; esac\n' > "$askpass"
+          chmod 700 "$askpass"
+          GIT_ASKPASS="$askpass" GIT_TERMINAL_PROMPT=0 git push origin HEAD:main
