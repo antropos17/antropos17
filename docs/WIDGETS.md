@@ -26,9 +26,8 @@ call a public statistics-rendering service. The cards refresh through
 [profile-cards.yml](../.github/workflows/profile-cards.yml) once a night at 02:23
 UTC, or manually through **Actions > Refresh public profile cards > Run workflow**.
 Scheduled runs can be delayed or disabled by GitHub; the last successful SVGs stay
-visible. The [initial generation and publication](https://github.com/antropos17/antropos17/actions/runs/39186101345)
-completed successfully on 2026-10-19. That run predates the compact summary;
-its new parser and hosted publication require their own successful workflow run.
+visible. [Compact summary generation and publication](https://github.com/antropos17/antropos17/actions/runs/39187228698)
+completed successfully on 2026-10-19, including the metric parser and both theme variants.
 
 Use a native picture element at the SVG's native width; GitHub constrains an image
 to its available content width. The dark source follows the viewer's color-scheme
