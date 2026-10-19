@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="460" height="211" viewBox="0 -8 460 211" fill="none" role="img" aria-labelledby="descId">
         <title id="titleId">Escape Studio's GitHub Stats, Rank: A</title>
-        <desc id="descId">Total Stars Earned: 163, Total Commits  (last year) : 3123, Total PRs: 857, Total Issues: 75, Contributed to (last year): 1</desc>
+        <desc id="descId">Total Stars Earned: 163, Total Commits  (last year) : 3124, Total PRs: 857, Total Issues: 75, Contributed to (last year): 1</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -64,7 +64,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 38.42283324880819;
+        stroke-dashoffset: 38.42281311594997;
       }
     }
   
