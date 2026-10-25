@@ -9,7 +9,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">Escape Studio&#39;s GitHub Stats, Rank: A</title>
-        <desc id="descId">Total Stars Earned: 165, Total Commits  (last year) : 3430, Total PRs: 923, Total Issues: 75, Contributed to (last year): 1</desc>
+        <desc id="descId">Total Stars Earned: 165, Total Commits  (last year) : 3498, Total PRs: 944, Total Issues: 75, Contributed to (last year): 1</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 33.4486576545415;
+        stroke-dashoffset: 33.44808024226503;
       }
     }
   
@@ -173,7 +173,7 @@
         x="224.01"
         y="12.5"
         data-testid="commits"
-      >3.4k</text>
+      >3.5k</text>
     </g>
   </g><g transform="translate(0, 50)">
     <g class="stagger" style="animation-delay: 750ms" transform="translate(25, 0)">
@@ -188,7 +188,7 @@
         x="224.01"
         y="12.5"
         data-testid="prs"
-      >923</text>
+      >944</text>
     </g>
   </g><g transform="translate(0, 75)">
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
