@@ -8,8 +8,8 @@
         role="img"
         aria-labelledby="descId"
       >
-        <title id="titleId">Escape Studio&#39;s GitHub Stats, Rank: A</title>
-        <desc id="descId">Total Stars Earned: 167, Total Commits  (last year) : 4003, Total PRs: 1072, Total Issues: 105, Contributed to (last year): 17</desc>
+        <title id="titleId">Escape Studio&#39;s GitHub Stats, Rank: A+</title>
+        <desc id="descId">Total Stars Earned: 167, Total Commits  (last year) : 4013, Total PRs: 1076, Total Issues: 105, Contributed to (last year): 18</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 31.788024777082818;
+        stroke-dashoffset: 30.672147748556373;
       }
     }
   
@@ -218,7 +218,7 @@
         x="224.01"
         y="12.5"
         data-testid="contribs"
-      >17</text>
+      >18</text>
     </g>
   </g>
     </svg>
